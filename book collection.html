@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Book Collection</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #3A0519;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 10px;
+        }
+
+        h1,
+        h2 {
+            color: #3A0519;
+            text-align: center;
+        }
+
+        h1 {
+            padding: 0px 30px;
+        }
+
+        input {
+            display: block;
+            margin: 13px auto;
+            width: 270px;
+            padding: 5px;
+        }
+
+        button {
+            transition: transform 0.5s ease-in-out;
+            display: block;
+            margin: 10px auto;
+            background-color: #3A0519;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #3A0519;
+        }
+
+        button:hover {
+            transform: scale(1.2);
+        }
+
+        .books {
+            transition: transform 0.5s ease-in-out;
+            background-color: #EF88AD;
+            color: #3A0519;
+            margin: 13px;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .books:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="book-collection">
+            <h1>My Book Collection</h1>
+        </div>
+
+        <div class="add-book">
+            <h2>Add a New Book</h2>
+
+            <input type="text" id="title" placeholder="Book Title">
+            <input type="text" id="author" placeholder="Author">
+            <input type="number" id="year" placeholder="Publication Year">
+            <button class="btn">Add Book</button>
+
+        </div>
+    </div>
+
+    <script>
+        let bookTitle = document.getElementById("title");
+        let authorName = document.getElementById("author");
+        let pubYear = document.getElementById("year");
+        let btn = document.querySelector(".btn");
+
+        btn.addEventListener("click", () => {
+            if (bookTitle.value.trim() === "" || authorName.value.trim() === "" || pubYear.value.trim() === "") {
+                alert("Please fill in all the fields")
+            }
+            else {
+                let div = document.createElement("div");
+
+                div.innerHTML = `${bookTitle.value.trim() } by ${ authorName.value.trim() } (${ pubYear.value.trim() })`;
+
+        div.setAttribute("class", "books");
+        document.querySelector(".book-collection").append(div);
+
+        bookTitle.value = ""
+        authorName.value = ""
+        pubYear.value = ""
+        }      
+    })
+
+    </script>
+</body>
+
+</html>

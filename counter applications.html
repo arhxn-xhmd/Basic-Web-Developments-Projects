@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter Applications</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .number {
+            text-align: center;
+            font-size: 50px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+        }
+
+        .btn {
+            transition: background-color color 0.5s ease-in-out;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        .btn:hover {
+            background-color: blue;
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Counter Application</h1>
+        <div class="number">0</div>
+
+        <div class="buttons">
+
+            <button class="btn" id="increment">Increment</button>
+            <button class="btn" id="decrement">Decrement</button>
+            <button class="btn" id="reset">Reset</button>
+
+        </div>
+    </div>
+
+    <script>
+        let incrementBtn = document.querySelector("#increment");
+        let decrementBtn = document.querySelector("#decrement");
+        let resetBtn = document.querySelector("#reset");
+        let number = document.querySelector(".number")
+        incrementBtn.addEventListener("click", () => {
+            let value = parseInt(number.innerText);
+            value++;
+            number.innerText = value;
+        })
+
+        decrementBtn.addEventListener("click", () => {
+            let value = parseInt(number.innerText);
+            value--;
+            number.innerText = value;
+        })
+
+        resetBtn.addEventListener("click", () => {
+            let value = parseInt(number.innerText);
+            number.innerText = 0;
+        })
+
+    </script>
+</body>
+
+</html>

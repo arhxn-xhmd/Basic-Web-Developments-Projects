@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Changer</title>
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #5409DA;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #5409DA;
+            padding: 0 23px;
+            margin: 23px;
+        }
+
+        input {
+            display: block;
+            margin: 13px auto;
+            padding: 4px;
+            width: 200px;
+        }
+
+        button {
+            background-color: #5409DA;
+            border-radius: 10px;
+            border: 1px solid white;
+            display: block;
+            margin: 10px auto;
+            padding: 13px;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <h1>Color Changer</h1>
+        <input type="text" id="color" placeholder="Enter a color">
+        <button>Change Color</button>
+
+    </div>
+
+    <script>
+
+        let color = document.getElementById("color");
+        let btn = document.querySelector("button");
+
+        btn.addEventListener("click", () => {
+
+            if (color.value.trim() === "") {
+                alert("Please fill in this field")
+            }
+
+            else {
+                let body = document.querySelector("body");
+                let heading = document.querySelector("h1");
+
+                if (body.hasAttribute("style")) {
+                    body.removeAttribute("style");
+                }
+
+                body.setAttribute("style", `background-color: ${ color.value.trim() }`)
+
+                if (heading.hasAttribute("style")) {
+                    heading.removeAttribute("style");
+                }
+
+                heading.setAttribute("style", `color: ${ color.value.trim() }`)
+
+                if (btn.hasAttribute("style")) {
+                    btn.removeAttribute("style");
+                }
+
+                btn.setAttribute("style", `background-color: ${ color.value.trim() }`)
+
+                color.value = "";
+
+            }
+        });
+
+    </script>
+</body>
+
+</html>

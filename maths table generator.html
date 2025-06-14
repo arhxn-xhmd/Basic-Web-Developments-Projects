@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maths Table Generator</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: skyblue;
+        }
+
+        .container {
+            box-shadow: 5px 5px 5px gray;
+            background-color: white;
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: skyblue;
+            margin: auto;
+            padding: 23px;
+        }
+
+        input {
+            display: block;
+            margin: 5px auto;
+            width: 200px;
+        }
+
+        button {
+            transition: transform 0.5s ease-in-out, background-color 0.5s ease-in-out;
+            display: block;
+            margin: 5px auto 20px;
+            background-color: skyblue;
+            border: 1px solid skyblue;
+            color: white;
+            font-size: 16px;
+            padding: 5px;
+            border-radius: 10px;
+        }
+
+        button:hover {
+            background-color: #00bfff;
+            transform: scale(1.1);
+        }
+
+        .tables {
+            transition: transform 0.5s ease-in-out;
+            background-color: #e0e0e0;
+            margin: 13px;
+            padding: 13px;
+        }
+
+        .tables:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Math Tables Generator</h1>
+            <input type="number" id="number" placeholder="Enter a number">
+            <button class="btn">See Table</button>
+        </div>
+    </div>
+
+    <script>
+        let num = document.getElementById("number");
+        let btn = document.querySelector(".btn");
+        btn.addEventListener("click", () => {
+            if (num.value.trim() === "") {
+                alert("Oops! Looks like you forgot to enter a number")
+            }
+            else {
+                for (let i = 0; i < 10; i++) {
+                    let div = document.createElement("div");
+                    div.innerHTML = `${num.value} X ${i + 1} = ${(i + 1) * num.value}`;
+                    div.setAttribute("class", "tables");
+                    document.querySelector(".container").append(div);
+                }
+                num.value = ""
+            }
+        }
+        )
+
+    </script>
+</body>
+
+</html>

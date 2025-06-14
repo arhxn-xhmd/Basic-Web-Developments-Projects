@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess The Number</title>
+    <style>
+        body {
+            background-color: #5409DA;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background-color: #BBFBFF;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #5409DA;
+            text-align: center;
+            margin: 23px;
+            padding: 0 20px;
+        }
+
+        input {
+            display: block;
+            margin: 13px auto;
+            padding: 4px;
+        }
+
+        button {
+            transition: transform 0.4s ease-in-out, background-color 0.4s ease-in-out;
+            display: block;
+            margin: 13px auto;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: 1px solid #BBFBFF;
+            background-color: #5409DA;
+            font-size: 15px;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            background-color: #4E71FF;
+            cursor: pointer;
+        }
+
+        .hint {
+            transition: transform 0.4s ease-in-out, background-color 0.4s ease-in-out;
+            background-color: #5409DA;
+            color: #BBFBFF;
+            text-align: center;
+            padding: 10px;
+            margin: 10px;
+            font-weight: bold;
+            font-size: 18px;
+            border-radius: 10px;
+        }
+
+        .hint:hover {
+            transform: scale(1.1);
+            background-color: #4E71FF;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <h1>Guess the Number!</h1>
+        <input type="number" id="number" placeholder="Enter a number">
+        <button class="btn">Guess</button>
+
+    </div>
+
+    <script>
+
+        let numStr = document.getElementById("number");
+        let btn = document.querySelector("button");
+
+        btn.addEventListener("click", () => {
+
+            let output;
+
+            if (numStr.value.trim() === "") {
+                output = "Please fill in the field!";
+            }
+
+            else if (isNaN(numStr.value.trim())) {
+                output = "Please enter a valid number!"
+            }
+
+            else {
+                let num = parseInt(numStr.value);
+                let randomNum = Math.floor(Math.random() * 100) + 1;
+
+                if (num == randomNum) {
+                    output = "Congratulations! You guessed it correctly"
+                }
+
+                else if (num > 100) {
+                    output = "The number is very large! Make it shorter"
+                }
+
+                else if (num < 0) {
+                    output = "The number is very small! Make it larger"
+                }
+
+                else if (num < 100 && num > randomNum) {
+                    output = "You are very close! Make the number a little shorter"
+                }
+
+                else if (num < 100 && num < randomNum) {
+                    output = "You are very close! Make the number a little bigger"
+                }
+
+                else {
+                    output = "Please enter a valid number"
+                }
+
+                let cont = document.querySelector(".container")
+                let last = cont.lastElementChild
+
+                if (last && last.getAttribute("class") == "hint") {
+                    cont.removeChild(last);
+                }
+
+                let div = document.createElement("div");
+                div.innerText = output;
+                div.setAttribute("class", "hint")
+                cont.append(div);
+                numStr.value = "";
+
+            }
+        })
+
+    </script>
+</body>
+
+</html>

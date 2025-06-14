@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit Converter</title>
+    <style>
+        body {
+      background-color: orange;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  
+    .container {
+      background-color: white;
+      border-radius: 10px;
+    }
+  
+    h1 {
+      text-align: center;
+      color: orange;
+      margin: 23px;
+      padding: 0 23px;
+    }
+  
+    input {
+      display: block;
+      margin: 13px auto;
+      width: 230px;
+      padding: 4px;
+    }
+  
+    select {
+      display: block;
+      margin: 13px auto;
+      padding: 5px;
+      width: 200px;
+    }
+  
+    button {
+      transition: transform background-color 0.5s ease-in-out;
+      background-color: orange;
+      border-radius: 10px;
+      display: block;
+      margin: 10px auto;
+      padding: 10px;
+      border: 1px solid white;
+    }
+  
+    button:hover {
+      transform: scale(1.1);
+      background-color: yellow;
+    }
+  
+    .output {
+      transition: transform 0.5s ease-in-out;
+      background-color: #e0e0e0;
+      border-radius: 10px;
+      padding: 10px;
+      margin: 13px;
+      text-align: center;
+      font-weight: bolder;
+      font-size: 20px;
+    }
+  
+    .output:hover {
+      transform: scale(1.1);
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+    
+    <h1>Unit Converter</h1>
+    <input type="number" id="number" placeholder="Enter the number">
+    
+    <select>
+      <option value="celcius">Fahrenheit to Celcius</option>
+      <option value="fahrenheit">Celcius to Fahrenheit</option>      
+    </select>
+   
+    <button class="btn">Convert</button>
+  </div>
+  
+  <script>
+  
+    let btn = document.querySelector(".btn");
+    let select = document.querySelector("select");
+    let numStr = document.getElementById("number");
+    
+    btn.addEventListener("click" , () => {
+      
+      let output;
+      
+      if (numStr.value.trim() === "") {
+        alert("Please fill in the field");
+      }
+      
+      else if (isNaN(numStr.value)) {
+        alert("Please Enter a valid number");
+      }
+      
+      else {
+        num = parseInt(numStr.value);
+        
+        if (select.value == "celcius") {
+          result = ((num - 32) * 5/9).toFixed(2)
+          output = `${num}°C = ${result}°F`;
+        }
+        
+        else {
+          result = ((num * 9/5) + 32).toFixed(2);
+          output = `${num}°F = ${result}°C`;
+        }
+        
+        div = document.createElement("div");
+        div.innerText = output;
+        div.setAttribute("class" , "output");
+        document.querySelector(".container").append(div);
+        document.getElementById("number").value = "";
+        
+      }
+    })
+    
+  
+  </script>
+</body>
+</html>

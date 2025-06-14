@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grocery List</title>
+    <style>
+        body {
+            background-color: blue;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: lightgreen;
+            border-radius: 10px;
+            padding: 23px;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 23px;
+            padding: 0 23px;
+        }
+
+        input {
+            background-color: white;
+            display: block;
+            width: 250px;
+            padding: 10px;
+            margin: 6px auto;
+            border: 1px solid lightgreen;
+            border-radius: 1px;
+        }
+
+        .btn {
+            transition: background-color 0.5s ease-out, color 0.5s ease-out;
+            background-color: yellow;
+            border: 1px solid lightgreen;
+            width: 270px;
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            color: blue;
+        }
+
+        .btn:hover {
+            background-color: blue;
+            color: yellow;
+        }
+
+        .list {
+            background-color: white;
+            display: flex;
+            border-radius: 10px;
+            padding: 6px;
+            align-items: center;
+            justify-content: space-between;
+            margin: 3px;
+        }
+
+        .edit-btn {
+            background-color: blue;
+            color: white;
+            padding: 6px;
+            margin: 3px;
+            border: 1px solid white;
+            border-radius: 10px;
+        }
+
+        .removeBtn {
+            background-color: red;
+            color: white;
+            padding: 6px;
+            margin: 3px;
+            border: 1px solid white;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Grocery List</h1>
+        <input type="text" id="ID" placeholder="Product ID">
+        <input type="text" id="item" placeholder="Item Name">
+        <input type="number" id="quantity" placeholder="Quantity">
+        <input type="number" id="price" placeholder="Price">
+        <button class="btn">Add Item</button>
+    </div>
+
+    <script>
+        let btn = document.querySelector("button");
+
+        let editing = false;
+        let editingSpan = null;
+
+        btn.addEventListener("click", () => {
+            let productId = document.getElementById("ID").value.trim();
+            let name = document.getElementById("item").value.trim();
+            let quantity = document.getElementById("quantity").value.trim();
+            let price = document.getElementById("price").value.trim();
+
+            if (productId === "" || name === "" || quantity === "" || price === "") {
+                alert("Please fill in all the fields");
+                return;
+            }
+
+            if (editing) {
+                editingSpan.innerText = `ID: ${productId} | ${name} (x${quantity}) | ₹${price}`;
+                editing = false;
+                editingSpan = null;
+                clearInputs();
+                return;
+            }
+
+            let div = document.createElement("div");
+            div.setAttribute("class", "list");
+
+            let span = document.createElement("span");
+            span.innerText = `ID: ${productId} | ${name} (x${quantity}) | ₹${price}`;
+            div.append(span);
+
+            let editBtn = document.createElement("button");
+            editBtn.innerText = "Edit";
+            editBtn.setAttribute("class", "edit-btn");
+
+            let removeBtn = document.createElement("button");
+            removeBtn.innerText = "Remove";
+            removeBtn.setAttribute("class", "removeBtn");
+
+            div.append(editBtn);
+            div.append(removeBtn);
+
+            document.querySelector(".container").append(div);
+            clearInputs();
+
+            editBtn.addEventListener("click", () => {
+                let text = span.innerText;
+                let parts = text.split(" | ");
+                let id = parts[0].split(": ")[1].trim();
+                let newName = parts[1].split(" (x")[0].trim();
+                let qnt = parts[1].split(" (x")[1].replace(")", "").trim();
+                let newPrice = parts[2].split("₹")[1].trim();
+
+                document.getElementById("ID").value = id;
+                document.getElementById("item").value = newName;
+                document.getElementById("quantity").value = qnt;
+                document.getElementById("price").value = newPrice;
+
+                editing = true;
+                editingSpan = span;
+            });
+
+            removeBtn.addEventListener("click", () => {
+                div.remove();
+                if (editingSpan === span) {
+                    clearInputs();
+                    editing = false;
+                    editingSpan = null;
+                }
+            });
+        });
+
+        function clearInputs() {
+            document.getElementById("ID").value = "";
+            document.getElementById("item").value = "";
+            document.getElementById("quantity").value = "";
+            document.getElementById("price").value = "";
+        }
+    </script>
+</body>
+
+</html>

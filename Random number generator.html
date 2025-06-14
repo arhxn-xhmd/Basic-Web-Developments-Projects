@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Number Generator</title>
+    <style>
+        body {
+            background-color: red;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: red;
+        }
+
+        button {
+            transition: transform 0.5s ease-in-out;
+            background-color: red;
+            color: white;
+            padding: 10px;
+            display: block;
+            margin: 5px auto;
+            border: 1px solid white;
+            border-radius: 10px;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+        }
+
+        .number {
+            transition: transform 0.5s ease-in-out;
+            background-color: #e0e0e0;
+            margin: 23px;
+            padding: 10px;
+            text-align: center;
+            font-weight: bolder;
+            font-size: 20px;
+            border-radius: 10px;
+        }
+
+        .number:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <h1>Random Number Generator</h1>
+        <button class="btn">Generate Random Number</button>
+
+    </div>
+
+    <script>
+
+        let btn = document.querySelector(".btn");
+
+        btn.addEventListener("click", () => {
+            let cont = document.querySelector(".container")
+            let last = cont.lastElementChild
+
+            if (last.getAttribute("class") == "number") {
+                last.remove();
+            }
+
+            let randomNum = Math.floor(Math.random() * 100) + 1;
+            let div = document.createElement("div");
+            div.innerText = `Random Number: ${randomNum}`;
+            div.setAttribute("class", "number")
+            document.querySelector(".container").append(div)
+        })
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Calculator</title>
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            font-family: 'Arial', sans-serif;
+        }
+
+        .results {
+            border-radius: 20px 20px 0px 0px;
+            border: 1px solid black;
+            width: 320px;
+            height: 80px;
+            background: #2c3e50;
+            font-size: 40px;
+            color: white;
+            padding: 3px;
+            display: flex;
+            align-items: end;
+            justify-content: end;
+            flex-wrap: wrap-reverse;
+            overflow: hidden;
+        }
+
+        .btns {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+        }
+
+        .clickable-btns,
+        .operators {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            padding: 23px;
+            font-size: 23px;
+            border: 0.5px solid black;
+        }
+
+        .clickable-btns {
+            background-color: #2c3e50;
+        }
+
+        .operators {
+            background-color: #e67e22;
+        }
+
+        .clickable-equals-to-btns {
+            background-color: #2ecc71;
+            font-size: 24px;
+            grid-column: span 2;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            border-radius: 10px;
+        }
+
+        .clear {
+            font-size: 25px;
+            text-align: center;
+            border: 0.5px solid black;
+            padding: 23px;
+            background-color: #e74c3c;
+            border-radius: 0px 0px 20px 20px;
+        }
+
+        .clickable-btns:hover {
+            background-color: #3d566e;
+        }
+
+        .operators:hover {
+            background-color: #d35400;
+        }
+
+        .clickable-equals-to-btns:hover {
+            background-color: #27ae60;
+        }
+
+        .clear:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="results"></div>
+        <div class="line"></div>
+        <div class="btns">
+            <div class="clickable-btns">1</div>
+            <div class="clickable-btns">2</div>
+            <div class="clickable-btns">3</div>
+            <div class="operators">+</div>
+            <div class="clickable-btns">4</div>
+            <div class="clickable-btns">5</div>
+            <div class="clickable-btns">6</div>
+            <div class="operators">-</div>
+            <div class="clickable-btns">7</div>
+            <div class="clickable-btns">8</div>
+            <div class="clickable-btns">9</div>
+            <div class="operators">*</div>
+            <div class="clickable-btns">0</div>
+            <div class="clickable-equals-to-btns">=</div>
+            <div class="operators">/</div>
+
+        </div>
+        <div class="clear">C</div>
+
+    </div>
+
+    <script>
+
+        let input = "";
+        let btns = document.querySelector(".btns");
+        let results = document.querySelector(".results");
+        let clear = document.querySelector(".clear");
+
+        btns.addEventListener("click", function (e) {
+            if (e.target.classList.contains("clickable-btns") || e.target.classList.contains("operators")) {
+                clickedDiv = e.target;
+                let newInput = input.concat(clickedDiv.innerText);
+                input += clickedDiv.innerText;
+                results.innerText = newInput;
+            };
+        });
+
+        let outputBtn = document.querySelector(".clickable-equals-to-btns");
+        outputBtn.addEventListener("click", () => {
+            let output = eval(results.innerText);
+            results.innerText = output;
+            input = output.toString();
+        });
+        clear.addEventListener("click", () => {
+            results.innerText = "";
+            input = "";
+        })
+
+    </script>
+</body>
+
+</html>

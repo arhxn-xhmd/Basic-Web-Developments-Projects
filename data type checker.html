@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Type Checker</title>
+    <style>
+        body {
+            background-color: #A53860;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #A53860;
+        }
+
+        input {
+            display: block;
+            margin: 13px auto;
+            width: 250px;
+            padding: 3px;
+        }
+
+        button {
+            transition: transform 0.5s ease-in;
+            background-color: #A53860;
+            border-radius: 10px;
+            border: 1px solid white;
+            color: white;
+            padding: 10px;
+            display: block;
+            margin: 5px auto;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+        }
+
+        .output {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>JavaScript Data Type Checker</h1>
+        <input type="text" id="value" placeholder="Enter a Value">
+        <button class="btn">Check Data Type</button>
+    </div>
+
+    <script>
+        document.querySelector(".btn").addEventListener("click", () => {
+            const raw = document.getElementById("value").value.trim();
+
+            if (raw === "") {
+                alert("Please fill in the field.");
+                return;
+            }
+
+            let input, type, parsedVal;
+
+            if (raw === "true") {
+                input = true;
+            } else if (raw === "false") {
+                input = false;
+            } else if (raw === "null") {
+                input = null;
+            } else if (raw === "undefined") {
+                input = undefined;
+            } else if (!isNaN(raw)) {
+                input = Number(raw);
+            } else {
+                input = raw;
+            }
+
+            type = typeof input;
+            parsedVal = (typeof input === "string") ? "${input}" : input;
+
+            const div = document.createElement("div");
+            div.className = "output";
+            div.innerHTML = `<b>Input:</b> ${raw}<br><b>Data Type:</b> ${type}<br><b>Parsed Value:</b> ${parsedVal}`;
+            document.querySelector(".container").appendChild(div);
+
+            document.getElementById("value").value = "";
+        });
+    </script>
+
+</body>
+
+</html>
